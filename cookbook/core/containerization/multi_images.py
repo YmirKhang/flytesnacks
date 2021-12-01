@@ -28,11 +28,11 @@ The following are reasons why it is complicated and not recommended:
 For every :py:class:`flytekit.PythonFunctionTask` type task or simply a task that is decorated with the ``@task`` decorator, users can supply rules of how the container image should be bound. By default, flytekit will associate one container image with all tasks. This image is called the ``default`` image.
 To alter the image, users should use the ``container_image`` parameter available in the :py:func:`flytekit.task` decorator. Any one of the following is an acceptable
 
-#. Image reference is specified, but the version is derived from the default images version ``container_image="docker.io/redis:{{.image.default.version}},``
-#. Both the FQN and the version are derived from the default image ``container_image="{{.image.default.fqn}}:spark-{{.image.default.version}},``
+#. Image reference is specified, but the version is derived from the default images version ``container_image="docker.io/redis:{{.images.default.version}},``
+#. Both the FQN and the version are derived from the default image ``container_image="{{.images.default.fqn}}:spark-{{.images.default.version}},``
 
 The images themselves are parameterizable in the config in the following format:
- ``{{.image.<name>.<attribute>}}``
+ ``{{.images.<name>.<attribute>}}``
 
 - ``name`` refers to the name of the image in the image configuration. The name ``default`` is a reserved keyword and will automatically apply to the default image name for this repository.
 - ``fqn`` refers to the fully qualified name of the image. For example it includes the repository and domain url of the image. E.g. docker.io/my_repo/xyz.
@@ -40,7 +40,7 @@ The images themselves are parameterizable in the config in the following format:
 
 .. note::
 
-    The default image (name + version) is always ``{{.image.default.fqn}}:{{.image.default.version}}``
+    The default image (name + version) is always ``{{.images.default.fqn}}:{{.images.default.version}}``
 
 .. warning:
 
